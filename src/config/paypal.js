@@ -1,5 +1,4 @@
-import checkoutServerSdk from "@paypal/checkout-server-sdk";
-import paypal from "@paypal/checkout-server-sdk"
+
 
 // export const Client = () =>{
 //     const credentials = new paypal.core.SandboxEnvironment(
@@ -15,12 +14,12 @@ import paypal from "@paypal/checkout-server-sdk"
 //     return 
 // }
 
-const pay = paypal()
 
 
-const CLIENT = 'CLIENTID';
-const SECRET = 'SECRETID';
-const PAYPAL_API = '';
+
+export const CLIENT = 'PUBLIC_ID';
+export const SECRET = 'SECRET_ID';
+export const PAYPAL_API = 'https://api-m.sandbox.paypal.com';
 
 const auth = {
     user: CLIENT,

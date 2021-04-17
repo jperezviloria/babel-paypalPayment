@@ -1,7 +1,7 @@
-import paypal from "../config/paypal"
+import auth, {PAYPAL_API, CLIENT, SECRET} from "../config/paypal"
 import request from "request"
 
-const createPayment = (req, res) =>{
+export const createPayment = (req, res) =>{
 
 
     const body = {
@@ -9,15 +9,15 @@ const createPayment = (req, res) =>{
         purchase_units: [{
             amount: {
                 currency_code: 'USD',
-                value: '150'
+                value: '75'
             }
         }],
         application_context:{
-            brand_name:`STS`,
+            brand_name:`Spanish Tongue Sound`,
             landing_page:'NO_PREFERENCE',
             user_action: 'PAY_NOW',
-            return_url: `http://localhost:3000/execute-payment`,
-            cancel_url: `http://localhost:3000/cancel-payment`,
+            return_url: `http://localhost:3003/execute-payment`,
+            cancel_url: `http://localhost:3003/cancel-payment`,
         }
     }
 
@@ -31,5 +31,19 @@ const createPayment = (req, res) =>{
         })
     })
     
+}
+
+export const executePayment = (req, res) =>{
+
+    const token = req.query.token;
+    //console.log(`${PAYPAL_API}/v2/checkout/orders/${token}/capture`)
+    request.post(`${PAYPAL_API}/v2/checkout/orders/${token}/capture`, {
+        auth,
+        body: {},
+        json: true
+    }, (err, response) =>{
+        res.json({data: response.body})
+    })
+
 }
 
